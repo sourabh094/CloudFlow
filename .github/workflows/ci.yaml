@@ -25,11 +25,14 @@ jobs:
     - name: Push Docker Image
       run: docker push sourabh094/cloudflow:v${{ github.run_number }}
 
-    - name: Pull Docker Image on EC2
+    - name: Deploy to EC2
       uses: appleboy/ssh-action@v1.2.2
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-         docker pull sourabh094/cloudflow:v${{ github.run_number }}   
+          docker pull sourabh094/cloudflow:v${{ github.run_number }}
+          docker stop cloudflow
+          docker rm cloudflow
+          docker run -d --name cloudflow -p 3000:3000 sourabh094/cloudflow:v${{ github.run_number }}
