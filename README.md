@@ -750,7 +750,29 @@ sudo nginx -t
 
 ---
 
-# 14. Troubleshooting Commands
+## 14. Screenshots
+
+### 1. GitHub Actions CI/CD Pipeline
+
+The GitHub Actions workflow automatically installs dependencies, runs tests, builds the Docker image, pushes it to Docker Hub, and deploys it to AWS EC2.
+
+![GitHub Actions CI/CD Pipeline](screenshots/github-actions.png)
+
+
+### 2. Docker Hub
+
+Versioned Docker images generated and pushed by the CI/CD pipeline.
+
+![Docker Hub Images](screenshots/docker-hub.png)
+
+
+### 3. Docker Container Running on EC2
+
+The deployed Docker image running as a container on the EC2 server.
+
+![Docker Container Running](screenshots/ec2-container.png)
+
+# 15. Troubleshooting Commands
 
 ### Container status
 
@@ -802,7 +824,7 @@ curl http://localhost:3000
 
 ---
 
-# 15. Important Information for Future Rebuilds
+# 16. Important Information for Future Rebuilds
 
 Keep these available:
 
