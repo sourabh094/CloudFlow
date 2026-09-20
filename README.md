@@ -19,49 +19,51 @@ Nginx acts as the reverse proxy between the public internet and the application 
 
 ---
 
-# 2. Architecture
+## 2. Architecture
 
-     ```               Developer
-                        │
-                    git push
-                        │
-                        ▼
-                GitHub Repository
-                        │
-                        ▼
-                GitHub Actions
-                        │
-          ┌─────────────┴─────────────┐
-          │                           │
-       CI Process                 Deployment
-          │                           │
-   ┌──────┴──────┐                    │
-   │             │                    │
-Install        Test                    │
-   │             │                    │
-   └──────┬──────┘                    │
-          │                            │
-     Docker Build                      │
-          │                            │
-     Docker Push                       │
-          │                            │
-          ▼                            ▼
-     Docker Hub ───────────────────► AWS EC2
-                                      │
-                                      ▼
-                                   Nginx :80
-                                      │
-                                      ▼
-                               Docker Container
-                                    :3000
-                                      │
-                                      ▼
-                               Application```
+```text
+                         Developer
+                             |
+                         git push
+                             |
+                             v
+                    GitHub Repository
+                             |
+                             v
+                    GitHub Actions
+                             |
+              +--------------+--------------+
+              |                             |
+              v                             v
+         CI Process                    Deployment
+              |                             |
+      +-------+-------+                     |
+      |               |                     |
+   Install           Test                  |
+      |               |                     |
+      +-------+-------+                     |
+              |                             |
+        Docker Build                        |
+              |                             |
+        Docker Push                         |
+              |                             |
+              v                             v
+         Docker Hub --------------------> AWS EC2
+                                            |
+                                            v
+                                         Nginx :80
+                                            |
+                                            v
+                                  Docker Container :3000
+                                            |
+                                            v
+                                        Application
+   ```
 
----
 
-# 3. Technologies
+## 3. Technologies
 
+```
 | Technology                   | Purpose                      |
 | ---------------------------- | ---------------------------- |
 | Node.js / Express            | Application                  |
@@ -74,10 +76,10 @@ Install        Test                    │
 | Nginx                        | Reverse proxy                |
 | SSH                          | Remote EC2 deployment        |
 | Supertest / Node Test Runner | Automated testing            |
-
+```
 ---
 
-# 4. Project Structure
+## 4. Project Structure
 
 ```text
 CloudFlow/
